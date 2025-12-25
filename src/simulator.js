@@ -1,5 +1,7 @@
 const simulateFIFO = require("./fifo");
 const simulateLRU = require("./lru");
+const simulateLFU = require("./lfu");
+const simulateARC = require("./arc");
 
 function runSimulation(trace, cacheSize, algorithms) {
     const results = {};
@@ -11,6 +13,13 @@ function runSimulation(trace, cacheSize, algorithms) {
 
         if (algo === "LRU") {
             results.LRU = simulateLRU(trace, cacheSize);
+        }
+        if (algo === "LFU") {
+            results.LFU = simulateLFU(trace, cacheSize);
+        }
+
+        if (algo === "ARC") {
+            results.ARC = simulateARC(trace, cacheSize);
         }
     }
 
