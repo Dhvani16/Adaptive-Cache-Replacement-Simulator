@@ -21,10 +21,19 @@ export default function Home() {
   }
 
   // ✅ Normalize result for table rendering
-  const tableData =
-    result && !Array.isArray(result)
-      ? Object.values(result)
-      : result;
+  let tableData = null;
+
+  if (result) {
+    if (Array.isArray(result)) {
+      tableData = result;
+    } else if (result.algorithm) {
+      // single algorithm result
+      tableData = [result];
+    } else {
+      // ALL comparison object
+      tableData = Object.values(result);
+    }
+  }
 
   return (
     <div
@@ -104,11 +113,11 @@ export default function Home() {
             <tbody>
               {tableData.map(r => (
                 <tr key={r.algorithm}>
-                  <td>{r.algorithm.toUpperCase()}</td>
+                  <td>{r.algorithm}</td>
                   <td>{r.hits}</td>
                   <td>{r.misses}</td>
                   <td>{r.evictions ?? "-"}</td>
-                  <td>{r.hitRatio.toFixed(2)}</td>
+                  <td>{r.hitRatio}</td>
                 </tr>
               ))}
             </tbody>
