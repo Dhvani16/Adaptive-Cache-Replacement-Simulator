@@ -1,4 +1,4 @@
-import { simulate } from "../../lib/simulator";
+import { simulate, simulateAll } from "../../lib/simulator";
 
 export default function handler(req, res) {
   if (req.method !== "POST") {
@@ -8,6 +8,7 @@ export default function handler(req, res) {
   try {
     let { algorithm, cacheSize, trace } = req.body;
 
+    // Normalize trace if it comes as string
     if (typeof trace === "string") {
       trace = trace
         .split(",")
@@ -21,9 +22,18 @@ export default function handler(req, res) {
       throw new Error("Trace must be an array");
     }
 
-    const result = simulate(algorithm, cacheSize, trace);
-    res.status(200).json(result);
+    let result;
+
+    // ✅ ALL-algorithm comparison support
+    if (algorithm === "ALL") {
+      result = simulateAll(cacheSize, trace);
+    } else {
+      result = simulate(algorithm, cacheSize, trace);
+    }
+
+    return res.status(200).json(result);
+
   } catch (err) {
-    res.status(500).json({ error: err.message });
+    return res.status(500).json({ error: err.message });
   }
 }

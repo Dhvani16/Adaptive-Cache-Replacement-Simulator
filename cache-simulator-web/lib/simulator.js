@@ -46,3 +46,14 @@ export function simulate(algorithm, cacheSize, trace) {
     hitRatio: result.hits / trace.length
   };
 }
+
+export function simulateAll(cacheSize, trace) {
+  const algorithms = ["lru", "fifo", "lfu", "arc"];
+  const results = {};
+
+  for (const algo of algorithms) {
+    results[algo] = simulate(algo, cacheSize, trace);
+  }
+
+  return results;
+}
