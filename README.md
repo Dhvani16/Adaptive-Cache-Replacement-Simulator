@@ -89,7 +89,7 @@ The simulator displays comparative results across all algorithms.
 
 ## 🔗 Live Demo
 
-(Deployed on Vercel – link to be added)
+Link: https://adaptive-cache-replacement-simulato.vercel.app/
 
 ---
 
