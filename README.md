@@ -62,6 +62,14 @@ http://localhost:3000
 
 ---
 
+## 🧪 Implementation Notes
+
+- All cache replacement policies are implemented using efficient in-memory data structures.
+- The simulator enforces identical workloads across algorithms to ensure fair performance comparison.
+- Response normalization is handled at the UI layer to support both single and multi-algorithm evaluations.
+
+---
+
 ## 🧪 Example Input
 
 Cache Size: 3
